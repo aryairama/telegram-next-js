@@ -1,5 +1,5 @@
-import style from '../../styles/auth.module.css';
-import { InputAuth, Button } from '../../components/base';
+import style from '../../../styles/auth.module.css';
+import { InputAuth, Button } from '../../../components/base';
 import { useState, useRef } from 'react';
 import SimpleReactValidator from 'simple-react-validator';
 import Head from 'next/head';
@@ -44,7 +44,12 @@ const ForgotPassword = (props) => {
               >
                 {validator.current.message('email', formData.email, 'required|email')}
               </InputAuth>
-              <Button className="btn-primary border mt-6 rounded-full">Send</Button>
+              <Button
+                disabled={validator.current.allValid() ? false : true}
+                className="btn-primary border mt-6 rounded-full"
+              >
+                Send
+              </Button>
             </div>
           </div>
         </div>

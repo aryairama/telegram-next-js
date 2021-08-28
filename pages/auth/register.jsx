@@ -68,7 +68,12 @@ const Register = (props) => {
               >
                 {validator.current.message('password', formData.password, 'required|min:8|max:255')}
               </InputAuth>
-              <Button className="btn-primary border mt-6 rounded-full">Register</Button>
+              <Button
+                disabled={validator.current.allValid() ? false : true}
+                className="btn-primary border mt-6 rounded-full"
+              >
+                Register
+              </Button>
               <div className="py-6 flex items-center flex-nowrap">
                 <hr className="border border-gray-300 w-4/12" />
                 <p className="font-Rubik text-center text-gray-500 w-4/12">Register With</p>

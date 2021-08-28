@@ -49,12 +49,17 @@ const Login = (props) => {
                 {validator.current.message('password', formData.password, 'required|min:8|max:255')}
               </InputAuth>
               <p
-                onClick={() => router.push('/auth/forgotpassword')}
+                onClick={() => router.push('/auth/forgot-password')}
                 className="font-Rubik text-right text-primary my-5 cursor-pointer"
               >
                 Forgot password?
               </p>
-              <Button className="btn-primary border rounded-full">Login</Button>
+              <Button
+                disabled={validator.current.allValid() ? false : true}
+                className="btn-primary border rounded-full"
+              >
+                Login
+              </Button>
               <div className="py-6 flex items-center flex-nowrap">
                 <hr className="border border-gray-300 w-4/12" />
                 <p className="font-Rubik text-center text-gray-500 w-4/12">Login With</p>
