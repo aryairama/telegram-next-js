@@ -5,12 +5,13 @@ import SimpleReactValidator from 'simple-react-validator';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
-const Login = (props) => {
+const Register = (props) => {
   const router = useRouter();
   const validator = useRef(new SimpleReactValidator({ className: 'text-sm text-red-500' }));
   const [formData, setFormData] = useState({
     email: '',
     password: '',
+    name: '',
   });
   const formDataHandler = (e) => {
     setFormData((oldValue) => ({ ...oldValue, [e.target.name]: e.target.value }));
@@ -18,14 +19,33 @@ const Login = (props) => {
   return (
     <>
       <Head>
-        <title>Auth | Login</title>
+        <title>Auth | Register</title>
       </Head>
       <div className={style['container-auth']}>
         <div className={style['grid-auth']}>
           <div className={style['layout-auth']}>
-            <p className={style['text-header']}>Login</p>
-            <div className={style['layout-form-login']}>
-              <p className="font-Rubik">Hi, Welcome back!</p>
+            <div className="relative">
+              <img
+                onClick={() => router.back()}
+                className="w-3 h-5 cursor-pointer absolute left-0 top-0 z-10"
+                src="/assets/icon/arrow-back.png"
+                alt="icon-back"
+              />
+              <p className={`${style['text-header']} absolute left-0 right-0 -top-2`}>Register</p>
+            </div>
+            <div className={`${style['layout-form-login']} !mt-14`}>
+              <p className="font-Rubik">Let’s create your account!</p>
+              <InputAuth
+                name="name"
+                value={formData.name}
+                onChange={formDataHandler}
+                onFocus={() => validator.current.showMessageFor('name')}
+                type="text"
+                styleContainer="mt-4"
+                label="Name"
+              >
+                {validator.current.message('name', formData.name, 'required|min:3|max:255')}
+              </InputAuth>
               <InputAuth
                 name="email"
                 value={formData.email}
@@ -48,16 +68,10 @@ const Login = (props) => {
               >
                 {validator.current.message('password', formData.password, 'required|min:8|max:255')}
               </InputAuth>
-              <p
-                onClick={() => router.push('/auth/forgotpassword')}
-                className="font-Rubik text-right text-primary my-5 cursor-pointer"
-              >
-                Forgot password?
-              </p>
-              <Button className="btn-primary border rounded-full">Login</Button>
+              <Button className="btn-primary border mt-6 rounded-full">Register</Button>
               <div className="py-6 flex items-center flex-nowrap">
                 <hr className="border border-gray-300 w-4/12" />
-                <p className="font-Rubik text-center text-gray-500 w-4/12">Login With</p>
+                <p className="font-Rubik text-center text-gray-500 w-4/12">Register With</p>
                 <hr className="border border-gray-300 w-4/12" />
               </div>
               <Button
@@ -66,12 +80,6 @@ const Login = (props) => {
                 <img className="mr-3" src="/assets/icon/google.png" alt="icon-google" />
                 <p>Google</p>
               </Button>
-              <div className="font-Rubik mt-5 flex justify-center cursor-pointer">
-                Don’t have an account?{' '}
-                <p onClick={() => router.push('/auth/register')} className="text-primary pl-2">
-                  Sign Up
-                </p>
-              </div>
             </div>
           </div>
         </div>
@@ -80,4 +88,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default Register;

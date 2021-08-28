@@ -17,3 +17,13 @@ p {
 .swal-footer {
   @apply text-center;
 }
+
+@layer components {
+  .btn-white-primary-outline {
+    @apply border-primary border text-primary hover:bg-primary hover:text-white;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-white hover:border-primary hover:text-primary;
+  }
+}
