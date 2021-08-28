@@ -1,4 +1,4 @@
-const colors = require('tailwindcss/colors')
+const colors = require('tailwindcss/colors');
 
 module.exports = {
   mode: 'jit',
@@ -16,6 +16,8 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
+      primary: '#7E98DF',
+      'gray-1': '#f6f6f6',
       black: colors.black,
       white: colors.white,
       gray: colors.coolGray,
@@ -269,6 +271,7 @@ module.exports = {
         '"Courier New"',
         'monospace',
       ],
+      Rubik: 'Rubik',
     },
     fontSize: {
       xs: ['0.75rem', { lineHeight: '1rem' }],

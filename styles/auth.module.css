@@ -1,0 +1,19 @@
+.container-auth {
+  @apply sm:pt-8 min-h-screen bg-white sm:bg-gray-1;
+}
+
+.grid-auth {
+  @apply grid grid-cols-12;
+}
+
+.layout-auth {
+  @apply col-span-12 sm:col-span-8 lg:col-span-4 sm:col-start-3 lg:col-start-5 sm:shadow-lg bg-white sm:rounded-3xl px-10 py-10;
+}
+
+.text-header {
+  @apply text-center text-primary font-Rubik font-medium text-2xl;
+}
+
+.layout-form-login {
+  @apply mt-5;
+}

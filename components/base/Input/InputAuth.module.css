@@ -1,0 +1,20 @@
+.input-auth {
+  @apply w-full box-border appearance-none outline-none border-b pb-2 border-gray-400;
+}
+
+.input-auth ~ .label-effect {
+  height: 1px;
+  @apply absolute bottom-0 left-0 w-0 transition-all duration-300;
+}
+
+.input-auth:focus ~ .label-effect {
+  @apply w-full border border-primary transition-all duration-300;
+}
+
+.input-label {
+  @apply text-gray-500 text-sm;
+}
+
+.input-icon-password {
+  @apply absolute right-2 top-8
+}
