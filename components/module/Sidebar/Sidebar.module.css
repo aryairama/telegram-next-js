@@ -1,0 +1,11 @@
+.sidebar-header {
+  @apply flex flex-row flex-wrap items-center justify-between mt-5;
+}
+
+.sidebar-header-brand {
+  @apply w-1/2 font-Rubik text-xl sm:text-2xl text-primary font-bold;
+}
+
+.sidebar-header-toggle {
+  @apply w-1/2 flex justify-end;
+}

@@ -1,0 +1,15 @@
+.tab-list-container {
+  @apply flex w-full flex-wrap;
+}
+
+.tab-list {
+  @apply text-center w-1/2;
+}
+
+.tab-list-label {
+  @apply block font-Rubik font-semibold w-full py-2 transition-all duration-500;
+}
+
+.tab-list-checkbox:checked ~ .tab-list-label {
+  @apply rounded-full bg-primary text-white transition-all duration-500;
+}

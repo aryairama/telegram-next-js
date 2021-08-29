@@ -1,0 +1,15 @@
+.input-group {
+  @apply flex flex-row w-full box-border items-stretch;
+}
+
+.input {
+  @apply bg-gray-100 font-Rubik rounded-r-lg pl-3 py-2 outline-none appearance-none;
+}
+
+.left-input-group {
+  @apply bg-gray-100 rounded-l-lg pl-2 pt-3;
+}
+
+.right-input-group {
+  @apply pt-3 pl-2;
+}

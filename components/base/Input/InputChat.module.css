@@ -1,0 +1,7 @@
+.input-chat {
+  @apply w-full bg-gray-100 text-lg font-Rubik rounded-lg px-10 py-2 outline-none appearance-none;
+}
+
+.container-input-chat {
+  @apply relative flex items-center w-full py-2 px-6 border-t border-gray-200;
+}

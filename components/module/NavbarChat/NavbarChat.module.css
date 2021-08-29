@@ -1,0 +1,26 @@
+.navbar-chat {
+  @apply bg-white py-4 shadow;
+}
+
+.navbar-chat-container {
+  @apply container flex w-full justify-between;
+}
+
+.navbar-chat-left {
+  @apply w-3/4 flex items-center;
+}
+
+.navbar-chat-right {
+  @apply w-1/4 flex justify-end items-center;
+}
+
+.main-chat {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: calc(90vh - 80px);
+  @apply overflow-y-scroll container py-2;
+}
+
+.main-chat::-webkit-scrollbar {
+  display: none;
+}
