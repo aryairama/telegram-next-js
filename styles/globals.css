@@ -24,7 +24,7 @@ p {
   }
 
   .btn-primary {
-    @apply bg-primary text-white hover:bg-white hover:border-primary hover:text-primary disabled:bg-blue-200 disabled:hover:border-blue-200 disabled:hover:text-white;
+    @apply bg-primary text-white border hover:bg-white hover:border-primary hover:text-primary disabled:bg-blue-200 disabled:hover:border-blue-200 disabled:hover:text-white;
   }
 }
 

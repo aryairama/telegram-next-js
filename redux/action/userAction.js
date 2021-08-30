@@ -21,7 +21,7 @@ export const login = (formData, history) => async (dispatch) => {
     const { data } = await (await axios.post('/users/login', formData)).data;
     dispatch({ type: 'LOGIN', payload: data });
     swal('Success', 'Login successful', 'success');
-    history.push('/')
+    history.push('/');
   } catch (error) {
     swal('Failed', error?.response?.data?.message, 'error');
     console.log(error);
@@ -66,5 +66,29 @@ export const resetPassword = async (formData, history, token) => {
   } catch (error) {
     swal('Failed', error?.response?.data?.message, 'error');
     console.log(error);
+  }
+};
+
+export const updateProfile = (formData) => async (dispatch, getState) => {
+  try {
+    const dataUpdate = new FormData();
+    dataUpdate.append('email', formData.email);
+    if (formData.profile_img) {
+      dataUpdate.append('profile_img', formData.profile_img);
+    }
+    dataUpdate.append('name', formData.name);
+    dataUpdate.append('phone_number', formData.phone_number);
+    dataUpdate.append('bio', formData.bio);
+    dataUpdate.append('username', formData.username);
+    const { data } = await (await axios.post(`/users/${getState().user.user.user_id}`, dataUpdate)).data;
+    dispatch({ type: 'PROFILE', payload: { ...getState().user.user, ...data } });
+    swal('Success', 'Successfully changed profile', 'success');
+  } catch (error) {
+    if (error.response?.data?.statusCode === 422) {
+      swal('Failed', error?.response?.data?.error[0].msg, 'error');
+    } else {
+      swal('Error', 'Update profile failed', 'error');
+      console.log(error);
+    }
   }
 };

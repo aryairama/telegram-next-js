@@ -1,0 +1,18 @@
+.navbar {
+  @apply bg-white py-4 shadow;
+}
+
+.navbar-container {
+  @apply container flex w-full items-center;
+}
+
+.main-content {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: calc(100vh - 60px);
+  @apply overflow-y-scroll container py-2;
+}
+
+.main-content::-webkit-scrollbar {
+  display: none;
+}
