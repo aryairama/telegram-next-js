@@ -5,6 +5,7 @@ import { useState } from 'react';
 const PrivateRoute = (Component) => {
   const Private = (props) => {
     const [showSidebar, setShowSidebar] = useState(false);
+    const [showRightSidebar, setShowRightSidebar] = useState(false);
     return (
       <div className={style['private-wrapper']}>
         <div
@@ -14,8 +15,9 @@ const PrivateRoute = (Component) => {
           <Sidebar />
         </div>
         <div className={`${style['main-content']} ${showSidebar ? style['main-content-slide'] : ''}`}>
-          <Component {...props} setShowSidebar={setShowSidebar} />
+          <Component {...props} setShowSidebar={setShowSidebar} setShowRightSidebar={setShowRightSidebar} />
         </div>
+        <div className={`${style['right-sidebar']} ${showRightSidebar ? style['right-sidebar-active'] : ''}`}></div>
       </div>
     );
   };

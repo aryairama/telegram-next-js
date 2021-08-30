@@ -12,7 +12,12 @@ const NavbarChat = (props) => {
               src="/assets/icon/arrow-back.png"
               alt="icon-back"
             />
-            <img className="w-12 h-12 rounded-lg" src="/assets/img/profile/1.png" alt="icon-chat-profile" />
+            <img
+              onClick={() => props.setShowRightSidebar((oldValue) => !oldValue)}
+              className="w-12 h-12 rounded-lg"
+              src="/assets/img/profile/1.png"
+              alt="icon-chat-profile"
+            />
             <div className="flex flex-col font-Rubik pl-3">
               <p className="font-bold">Mother</p>
               <p className="text-primary">Online</p>

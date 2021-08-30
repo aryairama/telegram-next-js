@@ -14,7 +14,11 @@ const Home = (props) => {
   // }, []);
   return (
     <>
-      <NavbarChat onClickMenu={() => dispatch(logout(router))} setShowSidebar={props.setShowSidebar}>
+      <NavbarChat
+        onClickMenu={() => dispatch(logout(router))}
+        setShowSidebar={props.setShowSidebar}
+        setShowRightSidebar={props.setShowRightSidebar}
+      >
         <p className="text-red-400">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium corporis quam et deserunt veniam eos est.
           Tempore maiores ullam nam, laborum dolor, cum blanditiis ea assumenda delectus vero sapiente repellendus quis?
