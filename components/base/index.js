@@ -4,3 +4,5 @@ export { default as InputChat } from './Input/InputChat';
 export { default as InputGroup } from './Input/InputGroup';
 export { default as TabList } from './TabList/TabList';
 export { default as TabContainer } from './TabList/TabContainer';
+export { default as Dropdown } from './Dropdown/Dropdown';
+export { default as DropdownItem } from './Dropdown/DropdownItem';

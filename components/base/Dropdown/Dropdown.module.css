@@ -1,0 +1,24 @@
+.dropdown-container {
+  @apply relative inline-block;
+}
+
+.dropdwon {
+  border-radius: 1.5rem 0.5rem;
+  @apply hidden right-0 absolute bg-primary z-50 shadow-inner border text-white;
+}
+
+.dropdwon-item {
+  @apply inline-flex flex-row justify-between items-center pl-5 pr-10 py-3 whitespace-nowrap w-full cursor-pointer;
+}
+
+.dropdwon-item:hover {
+  @apply bg-white text-black;
+}
+
+.dropdwon-item:hover > img {
+  filter: invert(0%) sepia(98%) saturate(7491%) hue-rotate(2deg) brightness(98%) contrast(94%);
+}
+
+.dropdown-container:hover > .dropdwon {
+  @apply block;
+}

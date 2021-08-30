@@ -27,3 +27,11 @@ p {
     @apply bg-primary text-white hover:bg-white hover:border-primary hover:text-primary disabled:bg-blue-200 disabled:hover:border-blue-200 disabled:hover:text-white;
   }
 }
+
+.icon-color-primary-white {
+  filter: invert(100%) sepia(94%) saturate(738%) hue-rotate(182deg) brightness(117%) contrast(100%);
+}
+
+.icon-color-primary-white:hover {
+  filter: invert(0%) sepia(98%) saturate(7491%) hue-rotate(2deg) brightness(98%) contrast(94%);
+}

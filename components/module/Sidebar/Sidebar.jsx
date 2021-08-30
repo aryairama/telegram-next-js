@@ -1,14 +1,28 @@
 import style from './Sidebar.module.css';
-import { InputGroup, TabContainer, TabList } from '../../base';
+import { InputGroup, TabContainer, TabList, Dropdown, DropdownItem } from '../../base';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../../redux/action/userAction';
 
 const Sidebar = (props) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
   return (
     <>
       <div className="container">
         <div className={style['sidebar-header']}>
           <p className={style['sidebar-header-brand']}>{process.env.NEXT_PUBLIC_NAME_APLICATION}</p>
           <div className={style['sidebar-header-toggle']}>
-            <img className="h-5 w-5" src="/assets/icon/sidebarmenu.png" alt="" />
+            <Dropdown styleDropdown="font-Rubik" type="img" src="/assets/icon/sidebarmenu.png">
+              <DropdownItem>
+                <img className="mr-2 h-5 icon-color-primary-white" src="/assets/icon/person.svg" alt="icon-person" />
+                <p>Profile</p>
+              </DropdownItem>
+              <DropdownItem onClick={() => dispatch(logout(router))}>
+                <img className="mr-2 h-5 icon-color-primary-white" src="/assets/icon/logout.svg" alt="icon-person" />
+                <p>Logout</p>
+              </DropdownItem>
+            </Dropdown>
           </div>
           <InputGroup styleContainer="mt-7" placeholder="Type your message..." />
           <TabContainer className="mt-5">

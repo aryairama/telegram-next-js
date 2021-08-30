@@ -3,19 +3,14 @@ import io from 'socket.io-client';
 import PrivateRoute from '../components/hoc/PrivateRoute';
 import { NavbarChat } from '../components/module';
 import { InputChat } from '../components/base';
-import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import { logout } from '../redux/action/userAction';
+
 const Home = (props) => {
-  const router = useRouter();
-  const dispatch = useDispatch();
   // useEffect(() => {
   //   io(process.env.NEXT_PUBLIC_API_URL);
   // }, []);
   return (
     <>
       <NavbarChat
-        onClickMenu={() => dispatch(logout(router))}
         setShowSidebar={props.setShowSidebar}
         setShowRightSidebar={props.setShowRightSidebar}
       >
