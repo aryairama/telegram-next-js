@@ -21,7 +21,7 @@ export const login = (formData, history) => async (dispatch) => {
     const { data } = await (await axios.post('/users/login', formData)).data;
     dispatch({ type: 'LOGIN', payload: data });
     swal('Success', 'Login successful', 'success');
-    history.back();
+    history.push('/')
   } catch (error) {
     swal('Failed', error?.response?.data?.message, 'error');
     console.log(error);
@@ -44,7 +44,6 @@ export const getProfile = () => async (dispatch) => {
     dispatch({ type: 'PROFILE', payload: data });
   } catch (error) {
     dispatch({ type: 'LOGOUT', payload: {} });
-    dispatch({ type: 'ADD_RESERVATION', payload: {} });
   }
 };
 

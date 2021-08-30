@@ -77,7 +77,7 @@ const ResetPassword = (props) => {
 
 export default ResetPassword;
 
-export const getServerSideProps = checkAuth(async (context, redux) => {
+export const getServerSideProps = checkAuth(async (context) => {
   let resetPassword = false;
   const headers = {
     headers: {

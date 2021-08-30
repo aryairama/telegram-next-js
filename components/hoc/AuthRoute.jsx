@@ -1,5 +1,6 @@
 /* eslint-disable react/display-name */
-import { initializeStore } from '../../redux/store';
+import { default as axios } from '../../configs/axiosConfig';
+
 const AuthRoute = (Component) => {
   return (props) => <Component {...props} />;
 };
@@ -19,19 +20,32 @@ export const parseCookieRedux = (cookie) => {
 function checkAuth(gssp) {
   return async (context) => {
     const {
-      req: { cookies },
+      req: {
+        headers: { cookie },
+      },
       res,
     } = context;
-    const redux = initializeStore(parseCookieRedux(cookies.telegram));
-    if (redux.getState().user.auth === true) {
-      return {
-        redirect: {
-          destination: '/',
-          permanent: false,
-        },
-      };
+    const headers = {
+      headers: {
+        Cookie: cookie,
+      },
+    };
+    try {
+      if (context.req.cookies?.authTelegram) {
+        const auth = await (await axios.get('/users/profile', headers)).data;
+        if (auth.statusCode === 200) {
+          return {
+            redirect: {
+              destination: '/',
+              permanent: false,
+            },
+          };
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
-    return await gssp(context, redux);
+    return await gssp(context);
   };
 }
 

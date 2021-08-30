@@ -5,6 +5,7 @@ import SimpleReactValidator from 'simple-react-validator';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { forgotPassword as resetPassword } from '../../../redux/action/userAction';
+import { checkAuth } from '../../../components/hoc/AuthRoute';
 
 const ForgotPassword = (props) => {
   const router = useRouter();
@@ -61,3 +62,4 @@ const ForgotPassword = (props) => {
 };
 
 export default ForgotPassword;
+export const getServerSideProps = checkAuth(async (context) => ({ props: {} }));

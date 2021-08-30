@@ -5,6 +5,7 @@ import SimpleReactValidator from 'simple-react-validator';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { register as userRegister } from '../../redux/action/userAction';
+import { checkAuth } from '../../components/hoc/AuthRoute';
 
 const Register = (props) => {
   const router = useRouter();
@@ -96,3 +97,4 @@ const Register = (props) => {
 };
 
 export default Register;
+export const getServerSideProps = checkAuth(async (context) => ({ props: {} }));

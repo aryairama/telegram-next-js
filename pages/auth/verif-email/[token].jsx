@@ -65,7 +65,7 @@ const VerifEmail = (props) => {
 
 export default VerifEmail;
 
-export const getServerSideProps = checkAuth(async (context, redux) => {
+export const getServerSideProps = checkAuth(async (context) => {
   let verifEmail = false;
   const headers = {
     headers: {

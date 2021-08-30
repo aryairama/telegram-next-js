@@ -4,8 +4,12 @@ import { useState, useRef } from 'react';
 import SimpleReactValidator from 'simple-react-validator';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { login as userLogin } from '../../redux/action/userAction';
+import { useDispatch } from 'react-redux';
+import { checkAuth } from '../../components/hoc/AuthRoute';
 
 const Login = (props) => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const validator = useRef(new SimpleReactValidator({ className: 'text-sm text-red-500' }));
   const [formData, setFormData] = useState({
@@ -55,6 +59,7 @@ const Login = (props) => {
                 Forgot password?
               </p>
               <Button
+                onClick={() => dispatch(userLogin(formData, router))}
                 disabled={validator.current.allValid() ? false : true}
                 className="btn-primary border rounded-full"
               >
@@ -86,3 +91,4 @@ const Login = (props) => {
 };
 
 export default Login;
+export const getServerSideProps = checkAuth(async (context) => ({ props: {} }));
