@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Sidebar } from '../module';
+import { Sidebar, Profile } from '../module';
 import style from './PrivateRoute.module.css';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,7 +11,7 @@ const PrivateRoute = (Component) => {
   const Private = (props) => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const { auth } = useSelector((state) => state.user);
+    const { auth, user } = useSelector((state) => state.user);
     const [showSidebar, setShowSidebar] = useState(false);
     const [showRightSidebar, setShowRightSidebar] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
@@ -31,7 +31,8 @@ const PrivateRoute = (Component) => {
           onClick={() => setShowSidebar(!showSidebar)}
           className={`${style['sidebar']} ${showSidebar ? style['sidebar-active'] : ''}`}
         >
-          {!showProfile && <Sidebar />}
+          {showProfile && <Profile setShowProfile={setShowProfile} user={user} />}
+          {!showProfile && <Sidebar setShowProfile={setShowProfile} />}
         </div>
         <div className={`${style['main-content']} ${showSidebar ? style['main-content-slide'] : ''}`}>
           <Component {...props} setShowSidebar={setShowSidebar} setShowRightSidebar={setShowRightSidebar} />

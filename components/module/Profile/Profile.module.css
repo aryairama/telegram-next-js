@@ -1,0 +1,25 @@
+.proflie-header {
+  @apply flex flex-col flex-wrap  mt-5;
+}
+
+.profile-username-wrapper {
+  @apply relative w-full;
+}
+
+.text-profile-username {
+  @apply absolute text-center left-0 right-0 -top-1 text-primary font-Rubik text-xl;
+}
+
+.profile-img {
+  width: 4.5rem;
+  height: 4.5rem;
+  @apply ml-auto mr-auto block mt-14 rounded-3xl;
+}
+
+.text-profile-name {
+  @apply mt-3 font-Rubik text-center text-xl;
+}
+
+.text-profile-username-small {
+  @apply text-center text-gray-400 font-Rubik;
+}

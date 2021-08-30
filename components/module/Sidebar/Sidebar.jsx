@@ -13,8 +13,8 @@ const Sidebar = (props) => {
         <div className={style['sidebar-header']}>
           <p className={style['sidebar-header-brand']}>{process.env.NEXT_PUBLIC_NAME_APLICATION}</p>
           <div className={style['sidebar-header-toggle']}>
-            <Dropdown styleDropdown="font-Rubik" type="img" src="/assets/icon/sidebarmenu.png">
-              <DropdownItem>
+            <Dropdown id="menu-profile" styleDropdown="font-Rubik" type="img" src="/assets/icon/sidebarmenu.png">
+              <DropdownItem onClick={() => props.setShowProfile(true)}>
                 <img className="mr-2 h-5 icon-color-primary-white" src="/assets/icon/person.svg" alt="icon-person" />
                 <p>Profile</p>
               </DropdownItem>

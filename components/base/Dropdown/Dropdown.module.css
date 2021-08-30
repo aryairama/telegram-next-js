@@ -19,6 +19,10 @@
   filter: invert(0%) sepia(98%) saturate(7491%) hue-rotate(2deg) brightness(98%) contrast(94%);
 }
 
-.dropdown-container:hover > .dropdwon {
+/* .dropdown-container:hover > .dropdwon {
+  @apply block;
+} */
+
+.dropdwon-checkbox:checked ~ .dropdwon {
   @apply block;
 }
