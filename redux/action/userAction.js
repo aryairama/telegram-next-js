@@ -47,3 +47,25 @@ export const getProfile = () => async (dispatch) => {
     dispatch({ type: 'ADD_RESERVATION', payload: {} });
   }
 };
+
+export const forgotPassword = async (formData) => {
+  try {
+    await axios.post('/users/forgot-password', formData);
+    swal('Reset password', 'Please check your email for confitm reset password!', 'success');
+  } catch (error) {
+    swal('Failed', error?.response?.data?.message, 'error');
+    console.log(error);
+  }
+};
+
+export const resetPassword = async (formData, history, token) => {
+  console.log(token);
+  try {
+    await axios.post('/users/reset-password', { password: formData.newpassword, tokenPassword: token });
+    swal('Success', 'Successfully reset password!', 'success');
+    history.push('/auth/login');
+  } catch (error) {
+    swal('Failed', error?.response?.data?.message, 'error');
+    console.log(error);
+  }
+};

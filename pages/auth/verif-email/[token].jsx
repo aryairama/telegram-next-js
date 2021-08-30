@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { checkAuth } from '../../../components/hoc/AuthRoute';
 import { default as axios } from '../../../configs/axiosConfig';
 
-const ResetPassword = (props) => {
+const VerifEmail = (props) => {
   const router = useRouter();
   return (
     <>
@@ -63,7 +63,7 @@ const ResetPassword = (props) => {
   );
 };
 
-export default ResetPassword;
+export default VerifEmail;
 
 export const getServerSideProps = checkAuth(async (context, redux) => {
   let verifEmail = false;

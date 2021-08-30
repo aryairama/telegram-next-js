@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import SimpleReactValidator from 'simple-react-validator';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { forgotPassword as resetPassword } from '../../../redux/action/userAction';
 
 const ForgotPassword = (props) => {
   const router = useRouter();
@@ -45,6 +46,7 @@ const ForgotPassword = (props) => {
                 {validator.current.message('email', formData.email, 'required|email')}
               </InputAuth>
               <Button
+                onClick={() => resetPassword(formData)}
                 disabled={validator.current.allValid() ? false : true}
                 className="btn-primary border mt-6 rounded-full"
               >
