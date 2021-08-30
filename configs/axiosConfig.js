@@ -21,6 +21,7 @@ axiosConfig.interceptors.response.use(
         return axiosConfig(originalRequest);
       } catch (error) {
         store.dispatch({ type: 'LOGOUT', payload: {} });
+        return Promise.reject(error);
       }
     }
     return Promise.reject(error);

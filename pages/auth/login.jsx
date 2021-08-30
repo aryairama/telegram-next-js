@@ -6,7 +6,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { login as userLogin } from '../../redux/action/userAction';
 import { useDispatch } from 'react-redux';
-import { checkAuth } from '../../components/hoc/AuthRoute';
+import { AuthRoute } from '../../components/hoc/AuthRoute';
 
 const Login = (props) => {
   const dispatch = useDispatch();
@@ -90,5 +90,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
-export const getServerSideProps = checkAuth(async (context) => ({ props: {} }));
+export default AuthRoute(Login);

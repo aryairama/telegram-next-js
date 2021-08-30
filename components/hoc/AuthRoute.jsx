@@ -1,8 +1,29 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/display-name */
 import { default as axios } from '../../configs/axiosConfig';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { getProfile } from '../../redux/action/userAction';
 
 const AuthRoute = (Component) => {
-  return (props) => <Component {...props} />;
+  const Auth = (props) => {
+    const router = useRouter();
+    const { auth } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    useEffect(async () => {
+      try {
+        await dispatch(getProfile());
+        if (auth) {
+          router.push('/');
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }, []);
+    return <Component {...props} />;
+  };
+  return Auth;
 };
 
 export const parseCookieRedux = (cookie) => {
@@ -17,36 +38,4 @@ export const parseCookieRedux = (cookie) => {
   }
 };
 
-function checkAuth(gssp) {
-  return async (context) => {
-    const {
-      req: {
-        headers: { cookie },
-      },
-      res,
-    } = context;
-    const headers = {
-      headers: {
-        Cookie: cookie,
-      },
-    };
-    try {
-      if (context.req.cookies?.authTelegram) {
-        const auth = await (await axios.get('/users/profile', headers)).data;
-        if (auth.statusCode === 200) {
-          return {
-            redirect: {
-              destination: '/',
-              permanent: false,
-            },
-          };
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-    return await gssp(context);
-  };
-}
-
-export { AuthRoute, checkAuth };
+export { AuthRoute };

@@ -2,7 +2,7 @@ import style from '../../../styles/auth.module.css';
 import { Button } from '../../../components/base';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { checkAuth } from '../../../components/hoc/AuthRoute';
+import { AuthRoute } from '../../../components/hoc/AuthRoute';
 import { default as axios } from '../../../configs/axiosConfig';
 
 const VerifEmail = (props) => {
@@ -63,9 +63,9 @@ const VerifEmail = (props) => {
   );
 };
 
-export default VerifEmail;
+export default AuthRoute(VerifEmail);
 
-export const getServerSideProps = checkAuth(async (context) => {
+export const getServerSideProps = async (context) => {
   let verifEmail = false;
   const headers = {
     headers: {
@@ -89,4 +89,4 @@ export const getServerSideProps = checkAuth(async (context) => {
   return {
     props: { verifEmail },
   };
-});
+};

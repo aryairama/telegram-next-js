@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 import SimpleReactValidator from 'simple-react-validator';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { checkAuth } from '../../../components/hoc/AuthRoute';
+import { AuthRoute } from '../../../components/hoc/AuthRoute';
 import { default as axios } from '../../../configs/axiosConfig';
 import { resetPassword as updatePassword } from '../../../redux/action/userAction';
 
@@ -75,9 +75,9 @@ const ResetPassword = (props) => {
   );
 };
 
-export default ResetPassword;
+export default AuthRoute(ResetPassword);
 
-export const getServerSideProps = checkAuth(async (context) => {
+export const getServerSideProps = async (context) => {
   let resetPassword = false;
   const headers = {
     headers: {
@@ -107,4 +107,4 @@ export const getServerSideProps = checkAuth(async (context) => {
   return {
     props: { resetPassword, token: context.params.token },
   };
-});
+};
