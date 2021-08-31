@@ -92,3 +92,16 @@ export const updateProfile = (formData) => async (dispatch, getState) => {
     }
   }
 };
+
+export const changePassword = async (formDataPassword) => {
+  try {
+    const data = {
+      old_password: formDataPassword.currentpassword,
+      new_password: formDataPassword.newpassword,
+    };
+    await axios.patch('/users/update-password', data);
+    swal('Success', 'Successfully changed password', 'success');
+  } catch (error) {
+    swal('Failed', error?.response?.data?.message, 'error');
+  }
+};

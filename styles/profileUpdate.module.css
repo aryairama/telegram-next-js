@@ -1,13 +1,13 @@
 .container-form-profile {
-  @apply container grid grid-cols-2 gap-6 bg-white shadow-lg pb-10;
+  @apply container grid grid-cols-2 place-items-end gap-6 bg-white shadow-lg pb-10;
 }
 
 .left-form {
-  @apply col-span-1;
+  @apply col-span-2 md:col-span-1 w-full;
 }
 
 .right-form {
-  @apply col-span-1;
+  @apply col-span-2 md:col-span-1 w-full;
 }
 
 .profile-img {
@@ -15,4 +15,3 @@
   height: 4.5rem;
   @apply ml-auto mr-auto block mt-14 rounded-3xl object-contain;
 }
-

@@ -6,7 +6,7 @@ import { Navbar } from '../../components/module';
 import { InputAuth, Button } from '../../components/base';
 import SimpleReactValidator from 'simple-react-validator';
 import { useDispatch } from 'react-redux';
-import { updateProfile } from '../../redux/action/userAction';
+import { updateProfile, changePassword } from '../../redux/action/userAction';
 
 const ProfileUpdate = (props) => {
   const dispatch = useDispatch();
@@ -27,6 +27,7 @@ const ProfileUpdate = (props) => {
       },
     })
   );
+  const validatorPassword = useRef(new SimpleReactValidator({ className: 'text-sm text-red-500' }));
   useEffect(async () => {
     props.setShowProfile(true);
     props.setShowRightSidebar(false);
@@ -39,9 +40,19 @@ const ProfileUpdate = (props) => {
     bio: '',
     profile_img: '',
   };
+  const initialStatePassword = {
+    currentpassword: '',
+    newpassword: '',
+    confirmpassword: '',
+  };
+  const [formPassword, setFormpassword] = useState(initialStatePassword);
+  const formPasswordHandler = (e) => {
+    setFormpassword((oldValue) => ({ ...oldValue, [e.target.name]: e.target.value }));
+  };
   const [formData, setFormData] = useState(
     props.user ? { ...props.user, email: '', profile_img: '', username: '' } : initialState
   );
+  const checkSamePassword = () => formPassword.newpassword === formPassword.confirmpassword;
   const formDataHandler = (e) => setFormData((oldValue) => ({ ...oldValue, [e.target.name]: e.target.value }));
   return (
     <Navbar setShowSidebar={props.setShowSidebar} pageName="Update Profile">
@@ -160,7 +171,60 @@ const ProfileUpdate = (props) => {
             Update
           </Button>
         </div>
-        <div className={style['right-form']}></div>
+        <div className={style['right-form']}>
+          <InputAuth
+            name="currentpassword"
+            value={formPassword.currentpassword}
+            onChange={formPasswordHandler}
+            onFocus={() => validatorPassword.current.showMessageFor('current password')}
+            type="password"
+            styleContainer="mt-4"
+            label="Current password"
+          >
+            {validatorPassword.current.message(
+              'current password',
+              formPassword.currentpassword,
+              'required|min:8|max:255'
+            )}
+          </InputAuth>
+          <InputAuth
+            name="newpassword"
+            value={formPassword.newpassword}
+            onChange={formPasswordHandler}
+            onFocus={() => validatorPassword.current.showMessageFor('new password')}
+            type="password"
+            styleContainer="mt-4"
+            label="New password"
+          >
+            {validatorPassword.current.message('new password', formPassword.newpassword, 'required|min:8|max:255')}
+          </InputAuth>
+          <InputAuth
+            name="confirmpassword"
+            value={formPassword.confirmpassword}
+            onChange={formPasswordHandler}
+            onFocus={() => validatorPassword.current.showMessageFor('confirm password')}
+            type="password"
+            styleContainer="mt-4"
+            label="Confirm password"
+          >
+            {validatorPassword.current.message(
+              'confirm password',
+              formPassword.confirmpassword,
+              'required|min:8|max:255'
+            )}
+          </InputAuth>
+          <Button
+            onClick={() => {
+              changePassword(formPassword);
+              Object.keys(validatorPassword.current.fields).forEach((e) => validatorPassword.current.hideMessageFor(e));
+              setFormpassword(initialStatePassword);
+            }}
+            disabled={validatorPassword.current.allValid() && checkSamePassword() ? false : true}
+            className="btn-primary rounded-xl mt-5"
+          >
+            Change password
+          </Button>
+        </div>
       </div>
     </Navbar>
   );
