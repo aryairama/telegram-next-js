@@ -3,9 +3,9 @@
 }
 
 .left-form {
-  @apply col-span-2 md:col-span-1 w-full md:mt-5;
+  @apply col-span-2 lg:col-span-1 w-full md:mt-5;
 }
 
 .right-form {
-  @apply col-span-2 md:col-span-1 w-full md:mt-5;
+  @apply col-span-2 lg:col-span-1 w-full md:mt-5;
 }
