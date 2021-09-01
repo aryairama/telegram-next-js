@@ -74,11 +74,34 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
             setShowRightSidebar={props.setShowRightSidebar}
           >
             {messages?.map((message, index) => (
-              <div
-                className={message.receiver_id === receiver.user_id ? style['right-message'] : style['left-message']}
-                key={index}
-              >
-                {message.message}
+              <div key={index} className="flex items-center w-full">
+                {message.receiver_id !== receiver.user_id && (
+                  <img
+                    src={
+                      receiver.profile_img
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/${receiver.profile_img}`
+                        : '/assets/img/profile/defaultprofile.png'
+                    }
+                    alt="icon-profile"
+                    className="w-12 h-12 rounded-lg mr-3"
+                  />
+                )}
+                <div
+                  className={message.receiver_id === receiver.user_id ? style['right-message'] : style['left-message']}
+                >
+                  {message.message}
+                </div>
+                {message.receiver_id === receiver.user_id && (
+                  <img
+                    src={
+                      user.profile_img
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/${user.profile_img}`
+                        : '/assets/img/profile/defaultprofile.png'
+                    }
+                    alt="icon-profile"
+                    className="w-12 h-12 rounded-lg ml-3"
+                  />
+                )}
               </div>
             ))}
           </NavbarChat>

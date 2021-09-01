@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Sidebar, Profile } from '../module';
+import { Sidebar, Profile, ProfileRightSidebar } from '../module';
 import style from './PrivateRoute.module.css';
 import { useState, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -69,7 +69,9 @@ const PrivateRoute = (Component) => {
               setShowProfile={setShowProfile}
             />
           </div>
-          <div className={`${style['right-sidebar']} ${showRightSidebar ? style['right-sidebar-active'] : ''}`}></div>
+          <div className={`${style['right-sidebar']} ${showRightSidebar ? style['right-sidebar-active'] : ''}`}>
+            <ProfileRightSidebar setShowRightSidebar={setShowRightSidebar} />
+          </div>
         </div>
       </>
     );
