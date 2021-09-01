@@ -8,17 +8,27 @@ import { readMessages } from '../redux/action/messagesAction';
 import style from '../styles/messages.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
 
 const Home = ({ socket, setupSocket, user, ...props }) => {
+  const dispatch = useDispatch();
   const { receiver } = useSelector((state) => state.chat);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
   useEffect(() => {
     if (Object.keys(receiver).length > 0) {
       props.setShowSidebar(true);
+      if (receiver.user_id === user.user_id) {
+        dispatch({ type: 'ADD_RECEIVER', payload: {} });
+      }
     }
     setupSocket();
   }, []);
+  useEffect(() => {
+    if (Object.keys(receiver).length > 0) {
+      document.querySelector('#main-chat').scrollTo(0, document.querySelector('#main-chat').scrollHeight);
+    }
+  }, [messages]);
   useEffect(async () => {
     if (Object.keys(receiver).length > 0) {
       try {
@@ -63,16 +73,14 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
             setShowSidebar={props.setShowSidebar}
             setShowRightSidebar={props.setShowRightSidebar}
           >
-            <div className="flex flex-col">
-              {messages?.map((message, index) => (
-                <div
-                  className={message.receiver_id === receiver.user_id ? style['right-message'] : style['left-message']}
-                  key={index}
-                >
-                  {message.message}
-                </div>
-              ))}
-            </div>
+            {messages?.map((message, index) => (
+              <div
+                className={message.receiver_id === receiver.user_id ? style['right-message'] : style['left-message']}
+                key={index}
+              >
+                {message.message}
+              </div>
+            ))}
           </NavbarChat>
           <div className="flex w-full bg-white box-border" style={{ height: '10vh' }}>
             <InputChat

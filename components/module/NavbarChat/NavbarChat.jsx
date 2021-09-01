@@ -32,7 +32,7 @@ const NavbarChat = (props) => {
           </div>
         </div>
       </div>
-      <div className={style['main-chat']}>{props.children}</div>
+      <div className={style['main-chat']} id="main-chat">{props.children}</div>
     </>
   );
 };

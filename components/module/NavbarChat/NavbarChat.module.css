@@ -18,7 +18,7 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
   height: calc(90vh - 80px);
-  @apply overflow-y-scroll container py-2;
+  @apply overflow-y-scroll container py-2 flex flex-col;
 }
 
 .main-chat::-webkit-scrollbar {
