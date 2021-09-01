@@ -15,6 +15,7 @@ const InputChat = (props) => {
         placeholder={props.placeholder}
         min={props.min}
         max={props.max}
+        onKeyDown={props.onKeyDown}
       />
       <img onClick={props.onClick} className="absolute right-12 top-5" src="/assets/icon/plus.png" alt="icon-plus" />
     </div>
