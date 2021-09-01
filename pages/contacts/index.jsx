@@ -70,7 +70,6 @@ const Contacts = (props) => {
           <InputSearch styleContainer="mt-5" name="myContacts" value={search.myContacts} onChange={setSearchHandler} />
           {myContacts?.data?.map((contact, index) => (
             <CardContact
-              styleContainer="cursor-pointer"
               onClick={() => {
                 dispatch({ type: 'ADD_RECEIVER', payload: contact });
                 router.push('/');

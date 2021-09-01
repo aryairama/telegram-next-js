@@ -5,12 +5,13 @@ import { NavbarChat } from '../components/module';
 import { InputChat } from '../components/base';
 import { useEffect } from 'react';
 
-const Home = (props) => {
+const Home = ({ socket, setupSocket, ...props }) => {
   const { receiver } = useSelector((state) => state.chat);
   useEffect(() => {
     if (Object.keys(receiver).length > 0) {
       props.setShowSidebar(true);
     }
+    setupSocket();
   }, []);
   return (
     <>
