@@ -9,8 +9,12 @@ import Pagination from 'rc-pagination';
 import 'rc-pagination/assets/index.css';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { useRouter } from 'next/router';
 
 const Contacts = (props) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [myContacts, setMyContacts] = useState({});
   const [allContacts, setAllContacts] = useState({});
   const [pageMyContacts, setPageMyContacts] = useState(1);
@@ -24,6 +28,7 @@ const Contacts = (props) => {
   useEffect(() => {
     props.setShowProfile(false);
     props.setShowRightSidebar(false);
+    props.setShowSidebar(true);
   }, []);
   useEffect(async () => {
     try {
@@ -65,6 +70,11 @@ const Contacts = (props) => {
           <InputSearch styleContainer="mt-5" name="myContacts" value={search.myContacts} onChange={setSearchHandler} />
           {myContacts?.data?.map((contact, index) => (
             <CardContact
+              styleContainer="cursor-pointer"
+              onClick={() => {
+                dispatch({ type: 'ADD_RECEIVER', payload: contact });
+                router.push('/');
+              }}
               clickImg={() => deleteDataContact(contact.contact_id)}
               key={index}
               name={contact.name}

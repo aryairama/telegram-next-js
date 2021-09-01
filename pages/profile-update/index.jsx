@@ -31,6 +31,7 @@ const ProfileUpdate = (props) => {
   useEffect(async () => {
     props.setShowProfile(true);
     props.setShowRightSidebar(false);
+    props.setShowSidebar(true);
   }, []);
   const initialState = {
     name: '',

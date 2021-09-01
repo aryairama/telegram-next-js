@@ -15,12 +15,16 @@ const NavbarChat = (props) => {
             <img
               onClick={() => props.setShowRightSidebar((oldValue) => !oldValue)}
               className="w-12 h-12 rounded-lg"
-              src="/assets/img/profile/1.png"
+              src={
+                props.profile_img
+                  ? `${process.env.NEXT_PUBLIC_API_URL}/${props.profile_img}`
+                  : '/assets/img/profile/defaultprofile.png'
+              }
               alt="icon-chat-profile"
             />
             <div className="flex flex-col font-Rubik pl-3">
-              <p className="font-bold">Mother</p>
-              <p className="text-primary">Online</p>
+              <p className="font-bold">{props.name}</p>
+              <p className="text-primary">{props.status}</p>
             </div>
           </div>
           <div onClick={props.onClickMenu} className={style['navbar-chat-right']}>

@@ -35,7 +35,13 @@ const Profile = (props) => {
         <p className="text-gray-400 border-b pb-4">Username</p>
         <p className="font-semibold mt-4">{props.user?.bio ? props.user?.bio : 'Not set'}</p>
         <p className="text-gray-400 border-b pb-4">Bio</p>
-        <p onClick={() => router.push('/profile-update')} className="text-primary cursor-pointer font-Rubik mt-4">
+        <p
+          onClick={() => {
+            props.setShowSidebar(true);
+            router.push('/profile-update');
+          }}
+          className="text-primary cursor-pointer font-Rubik mt-4"
+        >
           Update Profile
         </p>
       </div>

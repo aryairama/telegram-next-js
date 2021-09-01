@@ -18,7 +18,12 @@ const Sidebar = (props) => {
                 <img className="mr-2 h-5 icon-color-primary-white" src="/assets/icon/person.svg" alt="icon-person" />
                 <p>Profile</p>
               </DropdownItem>
-              <DropdownItem onClick={() => router.push('/contacts')}>
+              <DropdownItem
+                onClick={() => {
+                  props.setShowSidebar(true);
+                  router.push('/contacts');
+                }}
+              >
                 <img className="mr-2 h-5 icon-color-primary-white" src="/assets/icon/contact.svg" alt="icon-person" />
                 <p>Contacts</p>
               </DropdownItem>

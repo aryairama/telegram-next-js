@@ -5,20 +5,21 @@
 .sidebar {
   scrollbar-width: none;
   -ms-overflow-style: none;
-  margin-left: -100%;
+  margin-left: 0px;
   @apply w-full h-screen overflow-y-scroll transition-all duration-500;
   @apply border-r-2 border-gray-100;
 }
 
 .sidebar-active {
-  margin-left: 0px;
+  margin-left: -100%;
 }
 
 .main-content-slide {
-  margin-right: -100%;
+  margin-right: 100%;
 }
 
 .main-content {
+  margin-right: -100%;
   @apply w-full bg-white-1 transition-all duration-500;
 }
 

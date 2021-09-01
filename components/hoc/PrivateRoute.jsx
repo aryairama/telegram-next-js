@@ -40,12 +40,9 @@ const PrivateRoute = (Component) => {
           )}
         </Head>
         <div className={style['private-wrapper']}>
-          <div
-            onClick={() => setShowSidebar(!showSidebar)}
-            className={`${style['sidebar']} ${showSidebar ? style['sidebar-active'] : ''}`}
-          >
-            {showProfile && <Profile setShowProfile={setShowProfile} user={user} />}
-            {!showProfile && <Sidebar setShowProfile={setShowProfile} />}
+          <div className={`${style['sidebar']} ${showSidebar ? style['sidebar-active'] : ''}`}>
+            {showProfile && <Profile setShowSidebar={setShowSidebar} setShowProfile={setShowProfile} user={user} />}
+            {!showProfile && <Sidebar setShowSidebar={setShowSidebar} setShowProfile={setShowProfile} />}
           </div>
           <div className={`${style['main-content']} ${showSidebar ? style['main-content-slide'] : ''}`}>
             <Component

@@ -2,7 +2,7 @@ const CardContact = (props) => {
   return (
     <div
       onClick={props.onClick}
-      className="flex flex-row justify-between items-center w-full my-3 shadow rounded-l-2xl hover:shadow-lg font-Rubik"
+      className={`flex flex-row justify-between items-center w-full my-3 shadow rounded-l-2xl hover:shadow-lg font-Rubik ${props.styleContainer}`}
     >
       <div className="flex items-center">
         <img className="w-16 h-16 rounded-2xl object-contain" src={props.profile_img} alt="icon-profile" />
