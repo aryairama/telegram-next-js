@@ -18,6 +18,10 @@ const Sidebar = (props) => {
                 <img className="mr-2 h-5 icon-color-primary-white" src="/assets/icon/person.svg" alt="icon-person" />
                 <p>Profile</p>
               </DropdownItem>
+              <DropdownItem onClick={() => router.push('/contacts')}>
+                <img className="mr-2 h-5 icon-color-primary-white" src="/assets/icon/contact.svg" alt="icon-person" />
+                <p>Contacts</p>
+              </DropdownItem>
               <DropdownItem onClick={() => dispatch(logout(router))}>
                 <img className="mr-2 h-5 icon-color-primary-white" src="/assets/icon/logout.svg" alt="icon-person" />
                 <p>Logout</p>

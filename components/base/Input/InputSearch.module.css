@@ -1,0 +1,15 @@
+.input-search {
+  @apply flex flex-row w-full box-border items-stretch;
+}
+
+.input {
+  @apply w-full bg-gray-100 font-Rubik rounded-r-lg pl-3 py-2 outline-none appearance-none;
+}
+
+.left-input-search {
+  @apply bg-gray-100 rounded-l-lg pl-2 pt-3;
+}
+
+.right-input-search {
+  @apply pt-3 pl-2;
+}

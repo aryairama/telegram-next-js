@@ -1,0 +1,11 @@
+.container-contacts {
+  @apply container grid grid-cols-2 gap-6 bg-white shadow-lg pb-10;
+}
+
+.left-form {
+  @apply col-span-2 md:col-span-1 w-full md:mt-5;
+}
+
+.right-form {
+  @apply col-span-2 md:col-span-1 w-full md:mt-5;
+}
