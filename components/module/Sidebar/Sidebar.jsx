@@ -33,7 +33,12 @@ const Sidebar = (props) => {
               </DropdownItem>
             </Dropdown>
           </div>
-          <InputGroup styleContainer="mt-7" placeholder="Type your message..." />
+          <InputGroup
+            value={props.seacrh}
+            onChange={(e) => props.setSeacrh(e.target.value)}
+            styleContainer="mt-7"
+            placeholder="Type your message..."
+          />
           <TabContainer className="mt-5">
             <TabList type="radio" name="status_message" id="all" label="All" defaultChecked={true} />
             <TabList type="radio" name="status_message" id="unread" label="Unread" />

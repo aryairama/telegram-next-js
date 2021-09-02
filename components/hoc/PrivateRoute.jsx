@@ -19,6 +19,7 @@ const PrivateRoute = (Component) => {
     const [showSidebar, setShowSidebar] = useState(false);
     const [showRightSidebar, setShowRightSidebar] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
+    const [search,setSeacrh] = useState('')
     const [contacts, setContacts] = useState({});
     const socket = useRef(null);
     const setupSocket = () => {
@@ -43,13 +44,13 @@ const PrivateRoute = (Component) => {
     }, []);
     useEffect(async () => {
       try {
-        const { data, pagination } = await getListContact(10, 'DESC', 1, '');
+        const { data, pagination } = await getListContact(10, 'DESC', 1, search);
         console.log(data);
         setContacts((oldValue) => ({ ...oldValue, data, pagination }));
       } catch (error) {
         console.log(error);
       }
-    }, []);
+    }, [search]);
     return (
       <>
         <Head>
@@ -67,6 +68,8 @@ const PrivateRoute = (Component) => {
             )}
             {!showProfile && (
               <Sidebar
+                value={search}
+                setSeacrh={setSeacrh}
                 socket={socket}
                 setShowSidebar={setShowSidebar}
                 setShowProfile={setShowProfile}
