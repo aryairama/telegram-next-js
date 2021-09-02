@@ -23,6 +23,9 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
       }
     }
     setupSocket();
+    return () => {
+      dispatch({ type: 'DELETE_RECEIVER', payload: {} });
+    };
   }, []);
   useEffect(() => {
     if (Object.keys(receiver).length > 0) {
