@@ -1,9 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import style from './Sidebar.module.css';
-import { InputGroup, TabContainer, TabList, Dropdown, DropdownItem } from '../../base';
+import { InputGroup, TabContainer, TabList, Dropdown, DropdownItem, ListCardContact } from '../../base';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import { logout } from '../../../redux/action/userAction';
-
 const Sidebar = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -38,6 +38,27 @@ const Sidebar = (props) => {
             <TabList type="radio" name="status_message" id="all" label="All" defaultChecked={true} />
             <TabList type="radio" name="status_message" id="unread" label="Unread" />
           </TabContainer>
+        </div>
+        <div className={style['sidebar-list-contacts']}>
+          {props.contacts?.data?.map((contact) => (
+            <ListCardContact
+              key={contact.user_id}
+              profile_img={
+                contact.profile_img
+                  ? `${process.env.NEXT_PUBLIC_API_URL}/${contact.profile_img}`
+                  : '/assets/img/profile/defaultprofile.png'
+              }
+              onClick={() => {
+                dispatch({ type: 'ADD_RECEIVER', payload: contact });
+                props.setShowSidebar(true);
+                router.push('/');
+              }}
+              name={contact.name}
+              current_create_message={contact.current_create_message}
+              current_message={contact.current_message}
+              unread={contact.unread}
+            />
+          ))}
         </div>
       </div>
     </>

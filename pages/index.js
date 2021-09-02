@@ -38,7 +38,7 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
     }
   }, [receiver]);
   useEffect(() => {
-    if (socket.current && receiver) {
+    if (socket.current && Object.keys(receiver).length > 0) {
       socket.current.off('replySendMessageBE');
       socket.current.on('replySendMessageBE', (data) => {
         if (data.sender_id === receiver.user_id) {

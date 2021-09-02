@@ -8,6 +8,7 @@ export { default as Dropdown } from './Dropdown/Dropdown';
 export { default as DropdownItem } from './Dropdown/DropdownItem';
 export { default as CardContact } from './CardContact/CardContact';
 export { default as InputSearch } from './Input/InputSearch';
+export { default as ListCardContact } from './CardContact/ListCardContact';
 
 export const buttonItemRender = (current, type, element) => {
   if (type === 'prev') {

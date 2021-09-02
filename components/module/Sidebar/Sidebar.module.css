@@ -9,3 +9,14 @@
 .sidebar-header-toggle {
   @apply w-1/2 flex justify-end;
 }
+
+.sidebar-list-contacts {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: calc(100vh - 180px);
+  @apply overflow-y-scroll;
+}
+
+.sidebar-list-contacts::-webkit-scrollbar {
+  display: none;
+}

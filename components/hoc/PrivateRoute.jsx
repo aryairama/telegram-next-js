@@ -8,6 +8,8 @@ import { useEffect } from 'react';
 import { getProfile } from '../../redux/action/userAction';
 import Head from 'next/head';
 import io from 'socket.io-client';
+import { listContact as getListContact } from '../../redux/action/contactsAction';
+import { ListCardContact } from '../base';
 
 const PrivateRoute = (Component) => {
   const Private = (props) => {
@@ -17,6 +19,7 @@ const PrivateRoute = (Component) => {
     const [showSidebar, setShowSidebar] = useState(false);
     const [showRightSidebar, setShowRightSidebar] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
+    const [contacts, setContacts] = useState({});
     const socket = useRef(null);
     const setupSocket = () => {
       if (auth && socket.current === null) {
@@ -38,6 +41,15 @@ const PrivateRoute = (Component) => {
         console.log(error);
       }
     }, []);
+    useEffect(async () => {
+      try {
+        const { data, pagination } = await getListContact(10, 'DESC', 1, '');
+        console.log(data);
+        setContacts((oldValue) => ({ ...oldValue, data, pagination }));
+      } catch (error) {
+        console.log(error);
+      }
+    }, []);
     return (
       <>
         <Head>
@@ -54,7 +66,12 @@ const PrivateRoute = (Component) => {
               <Profile socket={socket} setShowSidebar={setShowSidebar} setShowProfile={setShowProfile} user={user} />
             )}
             {!showProfile && (
-              <Sidebar socket={socket} setShowSidebar={setShowSidebar} setShowProfile={setShowProfile} />
+              <Sidebar
+                socket={socket}
+                setShowSidebar={setShowSidebar}
+                setShowProfile={setShowProfile}
+                contacts={contacts}
+              />
             )}
           </div>
           <div className={`${style['main-content']} ${showSidebar ? style['main-content-slide'] : ''}`}>

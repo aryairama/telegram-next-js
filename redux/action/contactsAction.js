@@ -25,6 +25,19 @@ export const publicContacts = async (limit, order, page = 1, search = '', fieldO
   }
 };
 
+export const listContact = async (limit, order, page = 1, search = '', fieldOrder = '') => {
+  try {
+    const data = await (
+      await axios.get(
+        `/contacts/list-contact?order=${order}&limit=${limit}&page=${page}&search=${search}&fieldOrder=${fieldOrder}`
+      )
+    ).data;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const addContact = async (idUser) => {
   try {
     await axios.post('/contacts', { user_id: idUser });
