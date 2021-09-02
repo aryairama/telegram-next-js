@@ -48,6 +48,12 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
         }
       });
     }
+    if (socket.current && Object.keys(receiver).length === 0) {
+      socket.current.off('replySendMessageBE');
+      socket.current.on('replySendMessageBE', (data) => {
+        toast.success(`New messages from ${data.sender_name}`);
+      });
+    }
   }, [socket.current, receiver]);
   const messageHandler = (e) => setMessage(e.target.value);
   const sendMessage = () => {
@@ -113,19 +119,19 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
               placeholder="Type your message..."
             />
           </div>
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-          />
         </>
       )}
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </>
   );
 };

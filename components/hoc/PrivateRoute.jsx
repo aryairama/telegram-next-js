@@ -19,7 +19,7 @@ const PrivateRoute = (Component) => {
     const [showSidebar, setShowSidebar] = useState(false);
     const [showRightSidebar, setShowRightSidebar] = useState(false);
     const [showProfile, setShowProfile] = useState(false);
-    const [search,setSeacrh] = useState('')
+    const [search, setSeacrh] = useState('');
     const [contacts, setContacts] = useState({});
     const socket = useRef(null);
     const setupSocket = () => {
@@ -27,6 +27,14 @@ const PrivateRoute = (Component) => {
         socket.current = io(process.env.NEXT_PUBLIC_API_URL, {
           withCredentials: true,
         });
+      }
+    };
+    const getContact = async () => {
+      try {
+        const { data, pagination } = await getListContact(10, 'DESC', 1, search);
+        setContacts((oldValue) => ({ ...oldValue, data, pagination }));
+      } catch (error) {
+        console.log(error);
       }
     };
     const formatUrl = ([first, ...last]) => {
@@ -43,14 +51,14 @@ const PrivateRoute = (Component) => {
       }
     }, []);
     useEffect(async () => {
-      try {
-        const { data, pagination } = await getListContact(10, 'DESC', 1, search);
-        console.log(data);
-        setContacts((oldValue) => ({ ...oldValue, data, pagination }));
-      } catch (error) {
-        console.log(error);
+      await getContact();
+      if (socket.current) {
+        socket.current.off('reloadContact');
+        socket.current.on('reloadContact', async (data) => {
+          await getContact();
+        });
       }
-    }, [search]);
+    }, [search, socket.current]);
     return (
       <>
         <Head>
