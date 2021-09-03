@@ -4,7 +4,7 @@ import PrivateRoute from '../components/hoc/PrivateRoute';
 import { NavbarChat } from '../components/module';
 import { InputChat } from '../components/base';
 import { useEffect, useState } from 'react';
-import { readMessages } from '../redux/action/messagesAction';
+import { readMessages, getStatusReceiver } from '../redux/action/messagesAction';
 import style from '../styles/messages.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,6 +15,7 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
   const { receiver } = useSelector((state) => state.chat);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
+  const [online, setOnline] = useState(false);
   useEffect(() => {
     if (Object.keys(receiver).length > 0) {
       props.setShowSidebar(true);
@@ -25,6 +26,7 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
     setupSocket();
     return () => {
       dispatch({ type: 'DELETE_RECEIVER', payload: {} });
+      setOnline(false);
     };
   }, []);
   useEffect(() => {
@@ -35,9 +37,18 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
   useEffect(async () => {
     if (Object.keys(receiver).length > 0) {
       try {
+        setOnline(false);
         const { data } = await readMessages(receiver.user_id);
+        const { data: dataStatus } = await getStatusReceiver(receiver.user_id);
+        if (dataStatus.online === 1) {
+          setOnline(true);
+        } else {
+          setOnline(false);
+        }
         setMessages(data);
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     }
   }, [receiver]);
   useEffect(() => {
@@ -71,6 +82,20 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
       setMessage('');
     }
   };
+  useEffect(() => {
+    if (socket.current && Object.keys(receiver).length > 0) {
+      socket.current.on('status_offline', (data) => {
+        if (data.user_id === receiver.user_id) {
+          setOnline(false);
+        }
+      });
+      socket.current.on('status_online', (data) => {
+        if (data.user_id === receiver.user_id) {
+          setOnline(true);
+        }
+      });
+    }
+  }, [socket.current, receiver]);
   return (
     <>
       {Object.keys(receiver).length > 0 && (
@@ -78,7 +103,7 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
           <NavbarChat
             profile_img={receiver.profile_img}
             name={receiver.name}
-            status="Online"
+            status={online ? 'Online' : 'Offline'}
             setShowSidebar={props.setShowSidebar}
             setShowRightSidebar={props.setShowRightSidebar}
           >

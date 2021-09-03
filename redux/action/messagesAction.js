@@ -8,3 +8,12 @@ export const readMessages = async (receiver_id) => {
     console.log(error);
   }
 };
+
+export const getStatusReceiver = async (user_id) => {
+  try {
+    const data = await (await axios.get(`/users/status/${user_id}`)).data;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
