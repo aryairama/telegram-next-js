@@ -42,21 +42,26 @@ const PrivateRoute = (Component) => {
     };
     useEffect(async () => {
       try {
+        if (!auth) {
+          return router.push('/auth/login');
+        }
         await dispatch(getProfile());
         if (!auth) {
-          router.push('/auth/login');
+          return router.push('/auth/login');
         }
       } catch (error) {
         console.log(error);
       }
     }, []);
     useEffect(async () => {
-      await getContact();
-      if (socket.current) {
-        socket.current.off('reloadContact');
-        socket.current.on('reloadContact', async (data) => {
-          await getContact();
-        });
+      if (auth) {
+        await getContact();
+        if (socket.current) {
+          socket.current.off('reloadContact');
+          socket.current.on('reloadContact', async (data) => {
+            await getContact();
+          });
+        }
       }
     }, [search, socket.current]);
     return (
