@@ -12,6 +12,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "js-cookie": "^3.0.0",
+    "moment": "^2.29.1",
     "next": "11.1.0",
     "nextjs-progressbar": "0.0.11",
     "rc-pagination": "^3.1.9",
