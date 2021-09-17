@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux';
 import PrivateRoute from '../components/hoc/PrivateRoute';
 import { NavbarChat } from '../components/module';
 import { InputChat, ListChat } from '../components/base';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { readMessages, getStatusReceiver, deleteMessage } from '../redux/action/messagesAction';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
+import moment from 'moment';
 
 const Home = ({ socket, setupSocket, user, ...props }) => {
   const dispatch = useDispatch();
@@ -50,7 +51,7 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
         console.log(error);
       }
     }
-  }, [receiver,reload]);
+  }, [receiver, reload]);
   useEffect(() => {
     if (socket.current && Object.keys(receiver).length > 0) {
       socket.current.off('replySendMessageBE');
@@ -108,27 +109,35 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
             setShowRightSidebar={props.setShowRightSidebar}
           >
             {messages?.map((message, index) => (
-              <ListChat
-                key={index}
-                onClickRemove={async() => {
-                  await deleteMessage(message.message_id);
-                  setReload(!reload)
-                }}
-                styleContainer={message.receiver_id === receiver.user_id ? 'justify-end' : ''}
-                stylePostion={message.receiver_id === receiver.user_id ? '!ml-0' : ''}
-                optionDelete={message.receiver_id === receiver.user_id ? true : false}
-                positon={message.receiver_id === receiver.user_id ? 'right' : 'left'}
-                message={message.message}
-                profile={
-                  message.receiver_id === receiver.user_id
-                    ? user.profile_img
-                      ? `${process.env.NEXT_PUBLIC_API_URL}/${user.profile_img}`
+              <div key={index}>
+                {index === 0 && <p className="text-center">{moment(message.created_at).format('L')}</p>}
+                {index > 0 &&
+                  moment(messages[index - 1].created_at).format('L') !== moment(message.created_at).format('L') && (
+                    <p className="text-center">{moment(message.created_at).format('L')}</p>
+                  )}
+                <ListChat
+                  key={index}
+                  onClickRemove={async () => {
+                    await deleteMessage(message.message_id);
+                    setReload(!reload);
+                  }}
+                  styleContainer={message.receiver_id === receiver.user_id ? 'justify-end' : ''}
+                  stylePostion={message.receiver_id === receiver.user_id ? '!ml-0' : ''}
+                  optionDelete={message.receiver_id === receiver.user_id ? true : false}
+                  positon={message.receiver_id === receiver.user_id ? 'right' : 'left'}
+                  message={message.message}
+                  created_at={message.created_at}
+                  profile={
+                    message.receiver_id === receiver.user_id
+                      ? user.profile_img
+                        ? `${process.env.NEXT_PUBLIC_API_URL}/${user.profile_img}`
+                        : '/assets/img/profile/defaultprofile.png'
+                      : receiver.profile_img
+                      ? `${process.env.NEXT_PUBLIC_API_URL}/${receiver.profile_img}`
                       : '/assets/img/profile/defaultprofile.png'
-                    : receiver.profile_img
-                    ? `${process.env.NEXT_PUBLIC_API_URL}/${receiver.profile_img}`
-                    : '/assets/img/profile/defaultprofile.png'
-                }
-              />
+                  }
+                />
+              </div>
               // <div key={index}>
               //   {message.receiver_id === receiver.user_id && (
               //     <div className="flex items-center w-full justify-end">
