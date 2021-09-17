@@ -68,7 +68,7 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
       socket.current.on('replySendMessageBE', (data) => {
         if (data.sender_id === receiver.user_id) {
           setMessages((oldValue) => [...oldValue, data]);
-          setReloadReadMessage(!reloadReadMessage);
+          setReloadReadMessage((old)=> !old);
         } else {
           toast.success(`New messages from ${data.sender_name}`);
         }
@@ -130,7 +130,7 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
                   key={index}
                   onClickRemove={async () => {
                     await deleteMessage(message.message_id);
-                    setReload(!reload);
+                    setReload((oldVal) => !oldVal);
                   }}
                   styleContainer={message.receiver_id === receiver.user_id ? 'justify-end' : ''}
                   stylePostion={message.receiver_id === receiver.user_id ? '!ml-0' : ''}
