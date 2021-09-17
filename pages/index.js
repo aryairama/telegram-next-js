@@ -2,16 +2,16 @@
 import { useSelector } from 'react-redux';
 import PrivateRoute from '../components/hoc/PrivateRoute';
 import { NavbarChat } from '../components/module';
-import { InputChat } from '../components/base';
+import { InputChat, ListChat } from '../components/base';
 import { useEffect, useState } from 'react';
-import { readMessages, getStatusReceiver } from '../redux/action/messagesAction';
-import style from '../styles/messages.module.css';
+import { readMessages, getStatusReceiver, deleteMessage } from '../redux/action/messagesAction';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 
 const Home = ({ socket, setupSocket, user, ...props }) => {
   const dispatch = useDispatch();
+  const [reload, setReload] = useState(false);
   const { receiver } = useSelector((state) => state.chat);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -50,7 +50,7 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
         console.log(error);
       }
     }
-  }, [receiver]);
+  }, [receiver,reload]);
   useEffect(() => {
     if (socket.current && Object.keys(receiver).length > 0) {
       socket.current.off('replySendMessageBE');
@@ -108,35 +108,58 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
             setShowRightSidebar={props.setShowRightSidebar}
           >
             {messages?.map((message, index) => (
-              <div key={index} className="flex items-center w-full">
-                {message.receiver_id !== receiver.user_id && (
-                  <img
-                    src={
-                      receiver.profile_img
-                        ? `${process.env.NEXT_PUBLIC_API_URL}/${receiver.profile_img}`
-                        : '/assets/img/profile/defaultprofile.png'
-                    }
-                    alt="icon-profile"
-                    className="w-12 h-12 rounded-lg mr-3"
-                  />
-                )}
-                <div
-                  className={message.receiver_id === receiver.user_id ? style['right-message'] : style['left-message']}
-                >
-                  {message.message}
-                </div>
-                {message.receiver_id === receiver.user_id && (
-                  <img
-                    src={
-                      user.profile_img
-                        ? `${process.env.NEXT_PUBLIC_API_URL}/${user.profile_img}`
-                        : '/assets/img/profile/defaultprofile.png'
-                    }
-                    alt="icon-profile"
-                    className="w-12 h-12 rounded-lg ml-3"
-                  />
-                )}
-              </div>
+              <ListChat
+                key={index}
+                onClickRemove={async() => {
+                  await deleteMessage(message.message_id);
+                  setReload(!reload)
+                }}
+                styleContainer={message.receiver_id === receiver.user_id ? 'justify-end' : ''}
+                stylePostion={message.receiver_id === receiver.user_id ? '!ml-0' : ''}
+                optionDelete={message.receiver_id === receiver.user_id ? true : false}
+                positon={message.receiver_id === receiver.user_id ? 'right' : 'left'}
+                message={message.message}
+                profile={
+                  message.receiver_id === receiver.user_id
+                    ? user.profile_img
+                      ? `${process.env.NEXT_PUBLIC_API_URL}/${user.profile_img}`
+                      : '/assets/img/profile/defaultprofile.png'
+                    : receiver.profile_img
+                    ? `${process.env.NEXT_PUBLIC_API_URL}/${receiver.profile_img}`
+                    : '/assets/img/profile/defaultprofile.png'
+                }
+              />
+              // <div key={index}>
+              //   {message.receiver_id === receiver.user_id && (
+              //     <div className="flex items-center w-full justify-end">
+              //       <img src="/assets/icon/trash.svg" alt="icon-delete" className="w-6" />
+              //       <div className={`!ml-0 ${style['right-message']}`}>{message.message}</div>
+              //       <img
+              //         src={
+              //           user.profile_img
+              //             ? `${process.env.NEXT_PUBLIC_API_URL}/${user.profile_img}`
+              //             : '/assets/img/profile/defaultprofile.png'
+              //         }
+              //         alt="icon-profile"
+              //         className="w-12 h-12 rounded-lg ml-3"
+              //       />
+              //     </div>
+              //   )}
+              //   {message.receiver_id !== receiver.user_id && (
+              //     <div className="flex items-center w-full">
+              //       <img
+              //         src={
+              //           receiver.profile_img
+              //             ? `${process.env.NEXT_PUBLIC_API_URL}/${receiver.profile_img}`
+              //             : '/assets/img/profile/defaultprofile.png'
+              //         }
+              //         alt="icon-profile"
+              //         className="w-12 h-12 rounded-lg mr-3"
+              //       />
+              //       <div className={style['left-message']}>{message.message}</div>
+              //     </div>
+              //   )}
+              // </div>
             ))}
           </NavbarChat>
           <div className="flex w-full bg-white box-border" style={{ height: '10vh' }}>

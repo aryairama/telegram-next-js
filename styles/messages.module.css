@@ -1,9 +1,9 @@
 .left-message {
   border-radius: 25px 25px 25px 5px;
-  @apply bg-primary font-Rubik text-white py-2 mr-auto px-5 shadow-xl my-3;
+  @apply bg-primary font-Rubik text-white py-2 mr-auto px-5 shadow-xl my-3 cursor-pointer;
 }
 
 .right-message {
   border-radius: 25px 5px 25px 25px;
-  @apply bg-white font-Rubik py-2 px-5 ml-auto shadow-xl my-3 border;
+  @apply bg-white font-Rubik py-2 px-5 ml-auto shadow-xl my-3 border cursor-pointer;
 }

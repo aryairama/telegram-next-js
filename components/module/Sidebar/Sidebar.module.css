@@ -13,7 +13,8 @@
 .sidebar-list-contacts {
   scrollbar-width: none;
   -ms-overflow-style: none;
-  height: calc(100vh - 180px);
+  /* height: calc(100vh - 180px); */
+  height: calc(100vh - 100px);
   @apply overflow-y-scroll;
 }
 

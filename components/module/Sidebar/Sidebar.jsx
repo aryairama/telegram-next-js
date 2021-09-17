@@ -39,10 +39,10 @@ const Sidebar = (props) => {
             styleContainer="mt-7"
             placeholder="Type your message..."
           />
-          <TabContainer className="mt-5">
+          {/* <TabContainer className="mt-5">
             <TabList type="radio" name="status_message" id="all" label="All" defaultChecked={true} />
             <TabList type="radio" name="status_message" id="unread" label="Unread" />
-          </TabContainer>
+          </TabContainer> */}
         </div>
         <div className={style['sidebar-list-contacts']}>
           {props.contacts?.data?.map((contact) => (

@@ -1,4 +1,5 @@
 import { default as axios } from '../../configs/axiosConfig';
+import { toast } from 'react-toastify';
 
 export const readMessages = async (receiver_id) => {
   try {
@@ -14,6 +15,16 @@ export const getStatusReceiver = async (user_id) => {
     const data = await (await axios.get(`/users/status/${user_id}`)).data;
     return data;
   } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteMessage = async (idMessage) => {
+  try {
+    await axios.delete(`/messages/${idMessage}`);
+    toast.success('successfully delete message');
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
     console.log(error);
   }
 };
