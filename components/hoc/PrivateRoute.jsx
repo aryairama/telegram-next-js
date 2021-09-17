@@ -42,9 +42,6 @@ const PrivateRoute = (Component) => {
     };
     useEffect(async () => {
       try {
-        if (!auth) {
-          return router.push('/auth/login');
-        }
         await dispatch(getProfile());
         if (!auth) {
           return router.push('/auth/login');
