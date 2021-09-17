@@ -28,3 +28,12 @@ export const deleteMessage = async (idMessage) => {
     console.log(error);
   }
 };
+
+export const readStatusMessages = async (senderId, receiverId) => {
+  try {
+    await axios.post('/messages/read', { sender_id: senderId, receiver_id: receiverId });
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+    console.log(error);
+  }
+};

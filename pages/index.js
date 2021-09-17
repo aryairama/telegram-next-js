@@ -4,7 +4,7 @@ import PrivateRoute from '../components/hoc/PrivateRoute';
 import { NavbarChat } from '../components/module';
 import { InputChat, ListChat } from '../components/base';
 import { useEffect, useState, useRef } from 'react';
-import { readMessages, getStatusReceiver, deleteMessage } from '../redux/action/messagesAction';
+import { readMessages, getStatusReceiver, deleteMessage, readStatusMessages } from '../redux/action/messagesAction';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
@@ -13,6 +13,7 @@ import moment from 'moment';
 const Home = ({ socket, setupSocket, user, ...props }) => {
   const dispatch = useDispatch();
   const [reload, setReload] = useState(false);
+  const [reloadReadMessage, setReloadReadMessage] = useState(false);
   const { receiver } = useSelector((state) => state.chat);
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);
@@ -30,6 +31,15 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
       setOnline(false);
     };
   }, []);
+  useEffect(async () => {
+    try {
+      if (Object.keys(receiver).length > 0) {
+        await readStatusMessages(receiver.user_id, user.user_id);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [reloadReadMessage, receiver]);
   useEffect(() => {
     if (Object.keys(receiver).length > 0) {
       document.querySelector('#main-chat').scrollTo(0, document.querySelector('#main-chat').scrollHeight);
@@ -58,6 +68,7 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
       socket.current.on('replySendMessageBE', (data) => {
         if (data.sender_id === receiver.user_id) {
           setMessages((oldValue) => [...oldValue, data]);
+          setReloadReadMessage(!reloadReadMessage);
         } else {
           toast.success(`New messages from ${data.sender_name}`);
         }
