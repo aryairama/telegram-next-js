@@ -68,9 +68,15 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
       socket.current.on('replySendMessageBE', (data) => {
         if (data.sender_id === receiver.user_id) {
           setMessages((oldValue) => [...oldValue, data]);
-          setReloadReadMessage((old)=> !old);
+          setReloadReadMessage((old) => !old);
         } else {
           toast.success(`New messages from ${data.sender_name}`);
+        }
+      });
+      socket.current.off('replyDeleteChat');
+      socket.current.on('replyDeleteChat', (data) => {
+        if (data.receiver_id === user.user_id && data.sender_id === receiver.user_id) {
+          setReload((oldVal) => !oldVal);
         }
       });
     }
