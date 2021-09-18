@@ -6,8 +6,10 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { register as userRegister } from '../../redux/action/userAction';
 import { AuthRoute } from '../../components/hoc/AuthRoute';
+import { useDispatch } from 'react-redux';
 
 const Register = (props) => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const validator = useRef(new SimpleReactValidator({ className: 'text-sm text-red-500' }));
   const [formData, setFormData] = useState({
@@ -71,7 +73,7 @@ const Register = (props) => {
                 {validator.current.message('password', formData.password, 'required|min:8|max:255')}
               </InputAuth>
               <Button
-                onClick={() => userRegister(formData, router)}
+                onClick={() => dispatch(userRegister(formData, router))}
                 disabled={validator.current.allValid() ? false : true}
                 className="btn-primary border mt-6 rounded-full"
               >

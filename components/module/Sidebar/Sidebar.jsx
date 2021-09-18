@@ -3,7 +3,9 @@ import style from './Sidebar.module.css';
 import { InputGroup, TabContainer, TabList, Dropdown, DropdownItem, ListCardContact } from '../../base';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../../redux/action/userAction';
+import { logout, deleteAccount } from '../../../redux/action/userAction';
+import router from 'next/router';
+
 const Sidebar = (props) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -26,6 +28,10 @@ const Sidebar = (props) => {
               >
                 <img className="mr-2 h-5 icon-color-primary-white" src="/assets/icon/contact.svg" alt="icon-person" />
                 <p>Contacts</p>
+              </DropdownItem>
+              <DropdownItem onClick={() => dispatch(deleteAccount(props.user?.user_id, router))}>
+                <img className="mr-2 h-5 icon-color-primary-white" src="/assets/icon/trash.svg" alt="icon-person" />
+                <p>Delete Account</p>
               </DropdownItem>
               <DropdownItem onClick={() => dispatch(logout(router))}>
                 <img className="mr-2 h-5 icon-color-primary-white" src="/assets/icon/logout.svg" alt="icon-person" />

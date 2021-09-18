@@ -78,6 +78,7 @@ const PrivateRoute = (Component) => {
             )}
             {!showProfile && (
               <Sidebar
+                user={user}
                 value={search}
                 setSeacrh={setSeacrh}
                 socket={socket}

@@ -1,7 +1,7 @@
 import { default as axios } from '../../configs/axiosConfig';
 import swal from 'sweetalert';
 
-export const register = async (formData, history) => {
+export const register = (formData, history) => async (dispatch) => {
   try {
     dispatch({ type: 'SET_SHOW', payload: true });
     await axios.post('/users/register', formData);
@@ -112,4 +112,18 @@ export const changePassword = async (formDataPassword) => {
   } catch (error) {
     swal('Failed', error?.response?.data?.message, 'error');
   }
+};
+
+export const deleteAccount = (idUser, history) => async (dispatch) => {
+  try {
+    dispatch({ type: 'SET_SHOW', payload: true });
+    await axios.post('/users/delete', { user_id: idUser });
+    dispatch({ type: 'LOGOUT', payload: {} });
+    swal('Success', 'Successfully deleted account', 'success');
+    history.push('/auth/login');
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+    console.log(error);
+  }
+  dispatch({ type: 'SET_SHOW', payload: false });
 };

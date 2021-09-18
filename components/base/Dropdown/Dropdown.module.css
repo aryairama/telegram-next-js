@@ -8,7 +8,8 @@
 }
 
 .dropdwon-item {
-  @apply inline-flex flex-row justify-between items-center pl-5 pr-10 py-3 whitespace-nowrap w-full cursor-pointer;
+  @apply inline-flex flex-row items-center pl-5 pr-10 py-3 whitespace-nowrap w-full cursor-pointer;
+  /* @apply justify-between; */
 }
 
 .dropdwon-item:hover {
