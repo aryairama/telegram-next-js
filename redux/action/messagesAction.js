@@ -37,3 +37,13 @@ export const readStatusMessages = async (senderId, receiverId) => {
     console.log(error);
   }
 };
+
+export const clearHistoryMessages = async (senderId, receiverId) => {
+  try {
+    const data = await axios.post('/messages/clearhistory', { sender_id: senderId, receiver_id: receiverId });
+    toast.success(data.data.message);
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+    console.log(error);
+  }
+};

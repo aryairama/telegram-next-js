@@ -1,4 +1,5 @@
 import style from './NavbarChat.module.css';
+import { DropdownItem, Dropdown } from '../../base';
 
 const NavbarChat = (props) => {
   return (
@@ -27,12 +28,25 @@ const NavbarChat = (props) => {
               <p className="text-primary">{props.status}</p>
             </div>
           </div>
-          <div onClick={props.onClickMenu} className={style['navbar-chat-right']}>
-            <img className="h-5 w-5" src="/assets/icon/menu.png" alt="icon-menu" />
+          <div className={style['navbar-chat-right']}>
+            <Dropdown
+              id="action-chat"
+              styleDropdown="font-Rubik"
+              type="img"
+              src="/assets/icon/menu.png"
+              alt="icon-menu"
+            >
+              <DropdownItem onClick={props.clearHistory}>
+                <img className="mr-2 h-5 icon-color-primary-white" src="/assets/icon/trash.svg" alt="icon-clear-chat" />
+                <p>Delete chat history</p>
+              </DropdownItem>
+            </Dropdown>
           </div>
         </div>
       </div>
-      <div className={style['main-chat']} id="main-chat">{props.children}</div>
+      <div className={style['main-chat']} id="main-chat">
+        {props.children}
+      </div>
     </>
   );
 };

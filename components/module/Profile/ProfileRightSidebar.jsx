@@ -25,9 +25,11 @@ const ProfileRightSidebar = (props) => {
           alt="img-profile"
         />
         <p className="font-semibold mt-5">{receiver?.name ? receiver?.name : 'Not set'}</p>
-        <p className="text-gray-400">Online</p>
+        <p className="text-gray-400">{receiver?.email}</p>
         <p className="font-semibold mt-5">Phone number</p>
         <p className="text-gray-400">{receiver?.phone_number ? receiver?.phone_number : 'Not set'}</p>
+        <p className="font-semibold mt-5">Bio</p>
+        <p className="text-gray-400">{receiver?.bio ? receiver?.bio : 'Not set'}</p>
       </div>
     </div>
   );

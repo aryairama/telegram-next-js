@@ -4,7 +4,13 @@ import PrivateRoute from '../components/hoc/PrivateRoute';
 import { NavbarChat } from '../components/module';
 import { InputChat, ListChat } from '../components/base';
 import { useEffect, useState, useRef } from 'react';
-import { readMessages, getStatusReceiver, deleteMessage, readStatusMessages } from '../redux/action/messagesAction';
+import {
+  readMessages,
+  getStatusReceiver,
+  deleteMessage,
+  readStatusMessages,
+  clearHistoryMessages,
+} from '../redux/action/messagesAction';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
@@ -89,6 +95,12 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
           setReload((oldVal) => !oldVal);
         }
       });
+      socket.current.off('replyClearHistoryChat');
+      socket.current.on('replyClearHistoryChat', (data) => {
+        if (data.sender_id === receiver.user_id) {
+          setReload((oldVal) => !oldVal);
+        }
+      });
     }
   }, [socket.current, receiver]);
   const messageHandler = (e) => setMessage(e.target.value);
@@ -123,6 +135,10 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
       {Object.keys(receiver).length > 0 && (
         <>
           <NavbarChat
+            clearHistory={async () => {
+              await clearHistoryMessages(user.user_id, receiver.user_id);
+              setReload((old) => !old);
+            }}
             profile_img={receiver.profile_img}
             name={receiver.name}
             status={online ? 'Online' : 'Offline'}
