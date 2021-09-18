@@ -69,7 +69,7 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
         if (data.sender_id === receiver.user_id) {
           setMessages((oldValue) => [...oldValue, data]);
           setReloadReadMessage((old) => !old);
-        } else {
+        } else if (data.sender_id !== receiver.user_id) {
           toast.success(`New messages from ${data.sender_name}`);
         }
       });
