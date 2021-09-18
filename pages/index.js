@@ -101,6 +101,13 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
           setReload((oldVal) => !oldVal);
         }
       });
+      socket.current.off('replyDeleteAccount');
+      socket.current.on('replyDeleteAccount', (data) => {
+        if (data.user_id === receiver.user_id) {
+          dispatch({ type: 'DELETE_RECEIVER', payload: {} });
+          toast.warn('the account has been deleted');
+        }
+      });
     }
   }, [socket.current, receiver]);
   const messageHandler = (e) => setMessage(e.target.value);
