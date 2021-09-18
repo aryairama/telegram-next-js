@@ -3,6 +3,7 @@ import swal from 'sweetalert';
 
 export const register = async (formData, history) => {
   try {
+    dispatch({ type: 'SET_SHOW', payload: true });
     await axios.post('/users/register', formData);
     swal('Registration is successful', 'Please check your email for email verification!', 'success');
     history.push('/auth/login');
@@ -14,10 +15,12 @@ export const register = async (formData, history) => {
       console.log(error);
     }
   }
+  dispatch({ type: 'SET_SHOW', payload: false });
 };
 
 export const login = (formData, history) => async (dispatch) => {
   try {
+    dispatch({ type: 'SET_SHOW', payload: true });
     const { data } = await (await axios.post('/users/login', formData)).data;
     dispatch({ type: 'LOGIN', payload: data });
     swal('Success', 'Login successful', 'success');
@@ -26,25 +29,30 @@ export const login = (formData, history) => async (dispatch) => {
     swal('Failed', error?.response?.data?.message, 'error');
     console.log(error);
   }
+  dispatch({ type: 'SET_SHOW', payload: false });
 };
 
 export const logout = (history) => async (dispatch, getState) => {
   try {
+    dispatch({ type: 'SET_SHOW', payload: true });
     await axios.delete('/users/logout');
     dispatch({ type: 'LOGOUT', payload: {} });
     history.push('/auth/login');
   } catch (error) {
     swal('Error', 'Logout failed', 'error');
   }
+  dispatch({ type: 'SET_SHOW', payload: false });
 };
 
 export const getProfile = () => async (dispatch) => {
   try {
+    dispatch({ type: 'SET_SHOW', payload: true });
     const { data } = await (await axios.get('/users/profile')).data;
     dispatch({ type: 'PROFILE', payload: data });
   } catch (error) {
     dispatch({ type: 'LOGOUT', payload: {} });
   }
+  dispatch({ type: 'SET_SHOW', payload: false });
 };
 
 export const forgotPassword = async (formData) => {
