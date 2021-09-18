@@ -1,34 +1,124 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<br />
+<p align="center">
+<div align="center">
+  <img height="150" src="/screenshots/logo.png"/>
+</div>
+  <h3 align="center">Telegram Clone</h3>
+  <p align="center">
+    <a href="https://github.com/aryairama/telegram-next-js"><strong>Explore the docs »</strong></a>
+    <br />
+    <a href="https://bit.ly/telegram_next">View Demo</a>
+    ·
+    <a href="https://github.com/aryairama/telegram-next-js/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/aryairama/telegram-next-js/issues">Request Feature</a>
+  </p>
+</p>
 
+
+
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Setup .env](#setup-env)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [Related Project](#related-project)
+- [Contact](#contact)
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+Telegram clone is a chat application that has several features such as private chat, contacts, realtime notifications, and others.
+
+### Built With
+
+- [Redux](https://redux.js.org/)
+- [Tailwind Css](https://tailwindcss.com/)
+- [Next js](https://nextjs.org/)
+- and other
+
+
+<!-- GETTING STARTED -->
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
+This is an example of how to list things you need to use the software and how to install them.
+
+* [nodejs](https://nodejs.org/en/download/)
+
+### Installation
+
+- Clone This Front End Repo
+```
+git clone https://github.com/aryairama/telegram-next-js.git
+```
+- Go To Folder Repo
+```
+cd telegram-next-js
+```
+- Install Module
+```
+npm install
+```
+- Type ` npm run dev` To Start Website
+- Type ` npm run production` To Start Production
+
+### Setup .env
+Create .env file in your root project folder.
+```
+NEXT_PUBLIC_API_URL = [BACKEND_URL]
+NEXT_PUBLIC_NAME_APLICATION = [NAME_APLICATION]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<!-- ROADMAP -->
+## Screenshots
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+<div align="center">
+  <img width="250px" src="/screenshots/1.png" alt="1" />
+  <img width="250px" src="/screenshots/2.png" alt="2" />
+  <img width="250px" src="/screenshots/3.png" alt="3" /> 
+  <img width="250px" src="/screenshots/4.png" alt="4" />
+  <img width="250px" src="/screenshots/5.png" alt="5" />
+  <img width="250px" src="/screenshots/6.png" alt="6" /> 
+  <img width="250px" src="/screenshots/7.png" alt="7" />
+  <img width="250px" src="/screenshots/8.png" alt="8" />
+  <img width="250px" src="/screenshots/9.png" alt="9" /> 
+  <img width="250px" src="/screenshots/10.png" alt="10" />
+</div>
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+<!-- CONTRIBUTING -->
+## Contributing
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## Learn More
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Related Project
+:rocket: [`Backend Telegram Clone`](https://github.com/aryairama/telegram-express-js)
 
-## Deploy on Vercel
+:rocket: [`Frontend Telegram Clone`](https://github.com/aryairama/telegram-next-js)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+:rocket: [`Demo Telegram Clone`](https://bit.ly/telegram_next)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<!-- CONTACT -->
+## Contact
+
+My Email : aryairama987@gmail.com
+
+Project Link: [https://github.com/aryairama/telegram-next-js](https://github.com/aryairama/telegram-next-js)
