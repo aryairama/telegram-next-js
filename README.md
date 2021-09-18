@@ -92,8 +92,6 @@ NEXT_PUBLIC_NAME_APLICATION = [NAME_APLICATION]
   <img width="250px" src="/screenshots/6.png" alt="6" /> 
   <img width="250px" src="/screenshots/7.png" alt="7" />
   <img width="250px" src="/screenshots/8.png" alt="8" />
-  <img width="250px" src="/screenshots/9.png" alt="9" /> 
-  <img width="250px" src="/screenshots/10.png" alt="10" />
 </div>
 
 <!-- CONTRIBUTING -->
