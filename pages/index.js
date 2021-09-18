@@ -73,17 +73,21 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
           toast.success(`New messages from ${data.sender_name}`);
         }
       });
-      socket.current.off('replyDeleteChat');
-      socket.current.on('replyDeleteChat', (data) => {
-        if (data.receiver_id === user.user_id && data.sender_id === receiver.user_id) {
-          setReload((oldVal) => !oldVal);
-        }
-      });
     }
     if (socket.current && Object.keys(receiver).length === 0) {
       socket.current.off('replySendMessageBE');
       socket.current.on('replySendMessageBE', (data) => {
         toast.success(`New messages from ${data.sender_name}`);
+      });
+    }
+  }, [socket.current, receiver]);
+  useEffect(() => {
+    if (socket.current && Object.keys(receiver).length > 0) {
+      socket.current.off('replyDeleteChat');
+      socket.current.on('replyDeleteChat', (data) => {
+        if (data.receiver_id === user.user_id && data.sender_id === receiver.user_id) {
+          setReload((oldVal) => !oldVal);
+        }
       });
     }
   }, [socket.current, receiver]);
