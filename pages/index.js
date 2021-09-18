@@ -182,37 +182,6 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
                   }
                 />
               </div>
-              // <div key={index}>
-              //   {message.receiver_id === receiver.user_id && (
-              //     <div className="flex items-center w-full justify-end">
-              //       <img src="/assets/icon/trash.svg" alt="icon-delete" className="w-6" />
-              //       <div className={`!ml-0 ${style['right-message']}`}>{message.message}</div>
-              //       <img
-              //         src={
-              //           user.profile_img
-              //             ? `${process.env.NEXT_PUBLIC_API_URL}/${user.profile_img}`
-              //             : '/assets/img/profile/defaultprofile.png'
-              //         }
-              //         alt="icon-profile"
-              //         className="w-12 h-12 rounded-lg ml-3"
-              //       />
-              //     </div>
-              //   )}
-              //   {message.receiver_id !== receiver.user_id && (
-              //     <div className="flex items-center w-full">
-              //       <img
-              //         src={
-              //           receiver.profile_img
-              //             ? `${process.env.NEXT_PUBLIC_API_URL}/${receiver.profile_img}`
-              //             : '/assets/img/profile/defaultprofile.png'
-              //         }
-              //         alt="icon-profile"
-              //         className="w-12 h-12 rounded-lg mr-3"
-              //       />
-              //       <div className={style['left-message']}>{message.message}</div>
-              //     </div>
-              //   )}
-              // </div>
             ))}
           </NavbarChat>
           <div className="flex w-full bg-white box-border" style={{ height: '10vh' }}>
@@ -224,6 +193,11 @@ const Home = ({ socket, setupSocket, user, ...props }) => {
             />
           </div>
         </>
+      )}
+      {Object.keys(receiver).length === 0 && (
+        <div className="flex justify-center items-center h-full w-full">
+          <p className="font-Rubik text-xl text-gray-400">Please select a chat or contact to start messaging</p>
+        </div>
       )}
       <ToastContainer
         position="top-right"
