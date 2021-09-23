@@ -37,7 +37,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Telegram clone is a chat application that has several features such as private chat, contacts, realtime notifications, and others.
+Telegram Clone is a chat application made with next js, express js, tailwind css and several other technologies. Telegram Clone has several features such as private chat, contacts, realtime notifications, and others.
 
 ### Built With
 
