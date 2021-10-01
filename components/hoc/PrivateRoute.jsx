@@ -26,6 +26,7 @@ const PrivateRoute = (Component) => {
       if (auth && socket.current === null) {
         socket.current = io(process.env.NEXT_PUBLIC_API_URL, {
           withCredentials: true,
+          secure: true,
         });
       }
     };
