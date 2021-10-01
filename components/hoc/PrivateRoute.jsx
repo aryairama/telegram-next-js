@@ -62,6 +62,19 @@ const PrivateRoute = (Component) => {
         }
       }
     }, [search, socket.current]);
+    useEffect(() => {
+      if (socket.current) {
+        socket.current.on('connect', () => {
+          console.log(socket.current.id);
+        });
+        socket.current.on('connect_error', (error) => {
+          console.log(error);
+        });
+        socket.current.on('disconnect', (disconnect) => {
+          console.log(disconnect);
+        });
+      }
+    }, [socket.current]);
     return (
       <>
         <Head>
