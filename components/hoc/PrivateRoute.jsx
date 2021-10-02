@@ -72,11 +72,12 @@ const PrivateRoute = (Component) => {
           console.log(error);
         });
         socket.current.on('reconnect', function () {
-          socket.emit('reconnect');
+          socket.current.emit('reconnect');
         });
-        socket.current.on('disconnect', (disconnect) => {
+        socket.current.off('user-disconnect');
+        socket.current.on('user-disconnect', (disconnect) => {
           socket.current.connect();
-          socket.emit('reconnect');
+          socket.current.emit('reconnect');
         });
       }
     }, [socket.current]);
