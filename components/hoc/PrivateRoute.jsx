@@ -68,7 +68,11 @@ const PrivateRoute = (Component) => {
           console.log(socket.current.id);
         });
         socket.current.on('connect_error', (error) => {
+          socket.current.connect()
           console.log(error);
+        });
+        socket.current.on('reconnect', function () {
+          socket.emit('reconnect');
         });
         socket.current.on('disconnect', (disconnect) => {
           console.log(disconnect);
