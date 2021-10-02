@@ -63,7 +63,7 @@ const PrivateRoute = (Component) => {
       }
     }, [search, socket.current]);
     useEffect(() => {
-      if (socket.current) {
+      if (socket.current !== null) {
         socket.current.on('connect', () => {
           console.log(socket.current.id);
         });
